@@ -27,7 +27,7 @@ input {
     height: 30px;  /* Set the height of the input box */
   }
 
-.cal-button, .clear-button{
+.cal-button, .clear-button, .delete-button{
     padding: 2px;
     margin: 5px;
     width: 70px;
