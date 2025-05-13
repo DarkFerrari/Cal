@@ -3,20 +3,28 @@ calculateButton.addEventListener("click",()=>{
     const inputElement = document.querySelector("#user-input")
     const input = inputElement.value
     result = identifyOperator(input)
-    console.log(result)
     inputElement.value = result
 })
 
 function identifyOperator(input){
-    //input = Array.from(input)
-    result=0
+    let operators = ["+","-","%","/","*"]
     for(element of input){
         
-        if(element===("+")) 
-            {
+        if(operators.includes(element)) 
+        {
             let [a,b] = input.split(element)
-            result = parseInt(a) + parseInt(b)
+            a=parseFloat(a)
+            b=parseFloat(b)
+            switch(element)
+            {
+                case "+": return a+b;
+                case "-": return a-b;
+                case "/": return a/b;
+                case "*": return a*b;
+                case "%": return a%b;
             }
+        }
     }
-    return result
+    return "invalid input"
+
 }
