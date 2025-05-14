@@ -25,10 +25,14 @@ numButtons.forEach(button => {
 const operatorButtons = document.querySelectorAll(".operator-button")
 operatorButtons.forEach( button => {
     button.addEventListener("click",()=>{
-        if(shouldClear){
+        if(shouldClear)
+        {
             shouldClear=false
         }
-        inputElement.value += button.dataset.value
+        if(!(/[+\-*/%]/).test(inputElement.value.slice(-1)))
+        {
+            inputElement.value += button.dataset.value
+        }
     })
 })
 
@@ -40,13 +44,19 @@ deleteButton.addEventListener("click",()=> inputElement.value = inputElement.val
 // add both "=" and "calculate" for this function
 calculateButton.addEventListener("click",()=>{
     const input = inputElement.value
-    result = identifyOperator(input)
+    let result = identifyOperator(input)
     console.log(result)
     if(result==Infinity) inputElement.value = "Error - no divisions by 0 please"
     else if (Number.isInteger(result)) inputElement.value = (result)
     else if (!Number.isInteger(result)) inputElement.value = (result).toFixed(4)
     else inputElement.value = "Error"
     shouldClear = true;
+})
+
+inputElement.addEventListener("keydown",(event)=> {
+    if(event.key=="Enter"){
+        calculateButton.click();
+    }
 })
 
 const clearButton = document.querySelector(".clear-button")
