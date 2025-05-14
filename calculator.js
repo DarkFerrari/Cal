@@ -89,3 +89,29 @@ function identifyOperator(input){
     return "invalid input"
 
 }
+
+
+// for negative number inputs
+// function identifyOperator(input){
+//     let match = input.match(/^(-?\d+\.?\d*)([+\-*%/])(-?\d+\.?\d*)$/)
+//         if(!match) return "invalid input"
+
+//             let [,a,operatorElement,b] = match;
+//             a=parseFloat(a)
+//             b=parseFloat(b)
+
+//             console.log(a)
+//             console.log(b)
+
+//             switch(operatorElement)
+//             {
+//                 case "+": return a+b;
+//                 case "-": return a-b;
+//                 case "/": return a/b;
+//                 case "*": return a*b;
+//                 case "%": return a%b;
+//             }
+    
+//     return "invalid input"
+
+// }
