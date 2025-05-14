@@ -1,5 +1,6 @@
 const calculateButton = document.querySelector(".cal-button")
 const inputElement = document.querySelector("#user-input")
+let operators = ["+","-","%","/","*"]
 let shouldClear=false;
 
 //numerical buttons
@@ -10,7 +11,14 @@ numButtons.forEach(button => {
             inputElement.value=""
             shouldClear=false
         }
-        inputElement.value += button.dataset.value})
+        if(button.dataset.value=="."){
+            const currentValue = inputElement.value.split(/[\+\-\*\/%]/).pop()
+            if(!currentValue.includes("."))
+            {
+                inputElement.value += ".";
+            }
+        }
+        else inputElement.value += button.dataset.value})
 })
 
 //operator buttons
@@ -29,12 +37,14 @@ const deleteButton = document.querySelector(".delete-button")
 deleteButton.addEventListener("click",()=> inputElement.value = inputElement.value.slice(0,-1))
 
 //Calculate button
+// add both "=" and "calculate" for this function
 calculateButton.addEventListener("click",()=>{
     const input = inputElement.value
     result = identifyOperator(input)
+    console.log(result)
     if(result==Infinity) inputElement.value = "Error - no divisions by 0 please"
     else if (Number.isInteger(result)) inputElement.value = (result)
-    else if (!Number.isInteger) inputElement.value = (result).toFixed(4)
+    else if (!Number.isInteger(result)) inputElement.value = (result).toFixed(4)
     else inputElement.value = "Error"
     shouldClear = true;
 })
@@ -44,14 +54,15 @@ clearButton.addEventListener("click",()=> inputElement.value="")
 
 
 function identifyOperator(input){
-    let operators = ["+","-","%","/","*"]
     for(element of input){
         
         if(operators.includes(element)) 
         {
             let [a,b] = input.split(element)
             a=parseFloat(a)
+            console.log(a)
             b=parseFloat(b)
+            console.log(b)
             switch(element)
             {
                 case "+": return a+b;
