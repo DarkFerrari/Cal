@@ -46,10 +46,13 @@ calculateButton.addEventListener("click",()=>{
     const input = inputElement.value
     let result = identifyOperator(input)
     console.log(result)
-    if(result==Infinity) inputElement.value = "Error - no divisions by 0 please"
-    else if (Number.isInteger(result)) inputElement.value = (result)
-    else if (!Number.isInteger(result)) inputElement.value = (result).toFixed(4)
-    else inputElement.value = "Error"
+    try{
+        if(result==Infinity) inputElement.value = "Error - no divisions by 0 please"
+        else if (Number.isInteger(result)) inputElement.value = (result)
+        else inputElement.value = (result).toFixed(4)
+    }
+    catch (Error){ inputElement.value = "invalid input"}
+    //else inputElement.value = "Error"
     shouldClear = true;
 })
 
